@@ -29,7 +29,7 @@ const Provider = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 
   return (
     <UserDetailContext.Provider value={{ userDetail, setUserDetail }}>
-      <div>{children}</div>;
+      <div>{children}</div>
     </UserDetailContext.Provider>
   );
 };
