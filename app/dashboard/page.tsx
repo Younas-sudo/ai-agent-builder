@@ -1,11 +1,13 @@
-import { UserButton } from "@clerk/nextjs";
-import { AppHeader } from "./_componenets/AppHeader";
+
+import AiAgentTab from "./_componenets/AiAgentTab";
+import CreateAgentSection from "./_componenets/CreateAgentSection";
 
 
 const Dashboard = () => {
   return (
     <div >
-        dashboard
+        <CreateAgentSection />
+        <AiAgentTab />
     </div>
   )
 };

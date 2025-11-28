@@ -80,8 +80,11 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild size={open ? "lg" : "default"} isActive={path === item.url}>
-
+                  <SidebarMenuButton
+                    asChild
+                    size={open ? "lg" : "default"}
+                    isActive={path === item.url}
+                  >
                     <Link href={item.url}>
                       <item.icon />
                       {open && <span>{item.title}</span>}
@@ -99,8 +102,8 @@ export function AppSidebar() {
             <Gem />
             {open && <h2>Remaining Credit : {userDetail?.token}</h2>}
           </div>
+          {open && <Button>Upgrade to Unlimited</Button>}
         </div>
-        {open && <Button>Upgrade to Unlimited</Button>}
       </SidebarFooter>
     </Sidebar>
   );
