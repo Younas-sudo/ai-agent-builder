@@ -40,7 +40,6 @@ const AgentSetting = ({ selectedNode, updateFormData }: Props) => {
   const onSave = () => {
     updateFormData(formData);
     toast.success("Agent Setting Updated");
-    console.log(formData);
   };
   return (
     <div>
