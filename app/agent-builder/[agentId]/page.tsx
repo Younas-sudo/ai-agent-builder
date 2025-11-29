@@ -10,6 +10,8 @@ import {
   Controls,
   BackgroundVariant,
   Panel,
+  useOnSelectionChange,
+  OnSelectionChangeParams,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { use, useCallback, useContext, useEffect, useState } from "react";
@@ -30,12 +32,18 @@ import IfElseNode from "../_customNodes/IfElseNode";
 import WhileNode from "../_customNodes/WhileNode";
 import UserApprovalNode from "../_customNodes/UserApprovalNode";
 import ApiNode from "../_customNodes/ApiNode";
+import SettingPanel from "../_components/SettingPanel";
 
 type Props = {};
 
 const AgentBuilder = (props: Props) => {
-  const { addedNodes, setAddedNodes, nodeEdges, setNodeEdges } =
-    useContext(WorkflowContext);
+  const {
+    addedNodes,
+    setAddedNodes,
+    nodeEdges,
+    setNodeEdges,
+    setSelectedNode,
+  } = useContext(WorkflowContext);
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
   const [agentDetails, setAgentDetails] = useState<Agent>();
@@ -89,7 +97,7 @@ const AgentBuilder = (props: Props) => {
         setAddedNodes(updated);
         return updated;
       }),
-    [setAddedNodes]
+    [addedNodes]
   );
   const onEdgesChange = useCallback(
     (changes: any) =>
@@ -102,6 +110,19 @@ const AgentBuilder = (props: Props) => {
       setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
     []
   );
+
+  const onNodeSelect = useCallback(
+    ({ nodes, edges }: OnSelectionChangeParams) => {
+      setSelectedNode(nodes[0]);
+      console.log(nodes[0])
+      return;
+    },
+    []
+  );
+
+  useOnSelectionChange({
+    onChange: onNodeSelect
+  })
 
   const nodeTypes = {
     StartNode: StartNode,
@@ -133,7 +154,9 @@ const AgentBuilder = (props: Props) => {
           <Panel position="top-left">
             <AgentToolsPanel />
           </Panel>
-          <Panel position="top-right">Settings</Panel>
+          <Panel position="top-right">
+            <SettingPanel />
+          </Panel>
           <Panel position="bottom-center">
             <Button onClick={() => SaveNodesAndEdges()}>
               {loader ? (
