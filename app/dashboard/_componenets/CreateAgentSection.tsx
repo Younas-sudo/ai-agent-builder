@@ -40,7 +40,7 @@ const CreateAgentSection = () => {
 
     setLoader(false)
     //navigate to agent builder screen
-    router.push('/agent-builder'+agentId)
+    router.push('/agent-builder/'+agentId)
    };
 
   return (

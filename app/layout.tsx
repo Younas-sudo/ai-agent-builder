@@ -4,6 +4,7 @@ import "./globals.css";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import Provider from "./provider";
+import { Toaster } from "sonner";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <body className={` ${outfit.className} antialiased`}>
           <ConvexClientProvider>
             <Provider>{children}</Provider>
+            <Toaster  />
           </ConvexClientProvider>
         </body>
       </html>

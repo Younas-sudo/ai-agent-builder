@@ -1,11 +1,13 @@
-import { Id } from "@/convex/_generated/dataModel"
+import { Id } from "@/convex/_generated/dataModel";
 
-export type Agent={
-    _id: Id<'AgentTable'>,
-    agentId:string,
-    name:string,
-    config?:any,
-    published: boolean,
-    userId: Id<'UserTable'>,
-    _creationTime: number
-}
+export type Agent = {
+  _id: Id<"AgentTable">;
+  agentId: string;
+  name: string;
+  config?: any;
+  published: boolean;
+  userId: Id<"UserTable">;
+  _creationTime: number;
+  nodes?: any;
+  edges?: any;
+};

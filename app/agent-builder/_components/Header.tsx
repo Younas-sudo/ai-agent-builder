@@ -1,13 +1,20 @@
+"use client";
 import { ChevronLeft, Code, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Agent } from "@/types/AgentType";
+import { useRouter } from "next/navigation";
 
+interface Props {
+  agentDetail: Agent | undefined;
+}
 
-const Header = () => {
+const Header = ({ agentDetail }: Props) => {
+  const router = useRouter();
   return (
     <div className="w-full p-3 flex items-center justify-between">
       <div className="flex gap-2 items-center">
-        <ChevronLeft className="h-8 w-8" />
-        <h2 className="text-xl ">Agent Name</h2>
+        <ChevronLeft className="h-8 w-8 cursor-pointer" onClick={() => router.back()}/>
+        <h2 className="text-xl ">{agentDetail?.name}</h2>
       </div>
       <div className="flex gap-3 items-center">
         <Button variant={"ghost"}>

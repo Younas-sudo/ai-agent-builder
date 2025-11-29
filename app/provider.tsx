@@ -1,5 +1,6 @@
 "use client";
 import { UserDetailContext } from "@/context/UserDetailContext";
+import { WorkflowContext } from "@/context/WorkflowContext";
 import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/nextjs";
 import { useMutation } from "convex/react";
@@ -9,6 +10,15 @@ const Provider = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   const { user } = useUser();
   const createUser = useMutation(api.user.CreateNewUser);
   const [userDetail, setUserDetail] = useState<any>(null);
+  const [addedNodes, setAddedNodes] = useState<any>([
+    {
+      id: "start",
+      position: { x: 0, y: 0 },
+      data: { label: "Start" },
+      type: "StartNode",
+    },
+  ]);
+  const [nodeEdges, setNodeEdges] = useState<any>([]);
 
   useEffect(() => {
     user && CreateandGetUser();
@@ -29,7 +39,9 @@ const Provider = ({ children }: Readonly<{ children: React.ReactNode }>) => {
 
   return (
     <UserDetailContext.Provider value={{ userDetail, setUserDetail }}>
-      <div>{children}</div>
+      <WorkflowContext.Provider value={{ addedNodes, setAddedNodes, nodeEdges, setNodeEdges }}>
+        <div>{children}</div>
+      </WorkflowContext.Provider>
     </UserDetailContext.Provider>
   );
 };
