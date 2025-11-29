@@ -2,6 +2,7 @@ import { WorkflowContext } from "@/context/WorkflowContext";
 import React, { useContext } from "react";
 import AgentSetting from "../_nodeSettings/AgentSetting";
 import EndSetting from "../_nodeSettings/EndSetting";
+import IfElseSettings from "../_nodeSettings/IfElseSettings";
 
 type Props = {};
 
@@ -12,7 +13,7 @@ const SettingPanel = (props: Props) => {
       ...selectedNode,
       data: {
         ...selectedNode.data,
-        label: formData.name,
+        label: formData.name || selectedNode.data.label,
         settings: formData,
       },
     };
@@ -34,6 +35,12 @@ const SettingPanel = (props: Props) => {
       )}
       {selectedNode?.type == "EndNode" && (
         <EndSetting
+          selectedNode={selectedNode}
+          updateFormData={onUpdateNodeData}
+        />
+      )}
+      {selectedNode?.type == "IfElseNode" && (
+        <IfElseSettings
           selectedNode={selectedNode}
           updateFormData={onUpdateNodeData}
         />

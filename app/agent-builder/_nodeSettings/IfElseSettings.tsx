@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -8,9 +8,8 @@ type Props = {
   selectedNode: any;
   updateFormData: (formData: any) => void;
 };
-
-const EndSetting = ({ selectedNode, updateFormData }: Props) => {
-  const [formData, setFormData] = useState({ schema: "" });
+const IfElseSettings = ({selectedNode, updateFormData}: Props) => {
+  const [formData, setFormData] = useState({ condition: "" });
 
   useEffect(() => {
     selectedNode.data.settings && setFormData(selectedNode?.data?.settings);
@@ -23,14 +22,14 @@ const EndSetting = ({ selectedNode, updateFormData }: Props) => {
 
   return (
     <div>
-      <h2 className="font-bold">End</h2>
-      <p className="text-gray-500 mt-1">Choose the workflow output</p>
+      <h2 className="font-bold">If / Else</h2>
+      <p className="text-gray-500 mt-1">Create Conditions to branch your workflow</p>
       <div className="mt-2 space-y-2">
-        <Label>Output</Label>
-        <Textarea
-          placeholder="{name:string}"
-          onChange={(e) => setFormData({ schema: e.target.value })}
-          value={formData.schema}
+        <Label>If</Label>
+        <Input
+          placeholder="Enter Condition e.g output='any conditon'"
+          onChange={(e) => setFormData({ condition: e.target.value })}
+          value={formData.condition}
         />
       </div>
 
@@ -41,4 +40,4 @@ const EndSetting = ({ selectedNode, updateFormData }: Props) => {
   );
 };
 
-export default EndSetting;
+export default IfElseSettings;

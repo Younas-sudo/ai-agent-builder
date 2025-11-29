@@ -30,7 +30,7 @@ const AgentSetting = ({ selectedNode, updateFormData }: Props) => {
     schema: "",
   });
   useEffect(() => {
-    selectedNode && setFormData(selectedNode?.data?.settings);
+    selectedNode.data.settings && setFormData(selectedNode?.data?.settings);
   }, [selectedNode]);
 
   const handlechange = (key: any, value: any) => {
